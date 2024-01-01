@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Text Converter</title>
+    <script>
+        // 加密轉換規則
+        var encryptionRules = {
+            'A': 'Å', 'a': '@', 'B': 'Ɓ', 'b': 'ß', 'C': '€', 'c': 'ç',
+            'D': 'D', 'd': 'd', 'E': '∑', 'e': '3', 'F': 'Ƒ', 'f': 'ƒ',
+            'G': 'G', 'g': '9', 'H': 'H', 'h': 'ħ', 'I': '工', 'i': '!',
+            'J': 'J', 'j': 'ɉ', 'K': 'K', 'k': 'к', 'L': 'Ł', 'l': 'l',
+            'M': 'M', 'm': 'м', 'N': 'N', 'n': 'n', 'O': 'Θ', 'o': '0',
+            'P': 'P', 'p': 'ρ', 'Q': 'Q', 'q': 'ɋ', 'R': 'Я', 'r': 'ř',
+            'S': '§', 's': '$', 'T': 'T', 't': '†', 'U': 'U', 'u': 'u',
+            'V': 'V', 'v': 'v', 'W': 'Ϣ', 'w': 'ω', 'X': 'X', 'x': 'x',
+            'Y': 'Y', 'y': 'y', 'Z': 'Z', 'z': 'z'
+        };
+
+        // 解密轉換規則（加密規則的反向映射）
+        var decryptionRules = {};
+        for (var key in encryptionRules) {
+            decryptionRules[encryptionRules[key]] = key;
+        }
+
+        function encryptText() {
+            var input = document.getElementById('inputTextEncrypt').value;
+            var encryptedText = '';
+            for (var i = 0; i < input.length; i++) {
+                var character = input[i];
+                encryptedText += encryptionRules[character] || character;
+            }
+            document.getElementById('outputTextEncrypt').value = encryptedText;
+        }
+
+        function decryptText() {
+            var input = document.getElementById('inputTextDecrypt').value;
+            var decryptedText = '';
+            for (var i = 0; i < input.length; i++) {
+                var character = input[i];
+                decryptedText += decryptionRules[character] || character;
+            }
+            document.getElementById('outputTextDecrypt').value = decryptedText;
+        }
+    </script>
+</head>
+<body>
+    <h2>Text Encryptor</h2>
+    <input type="text" id="inputTextEncrypt" placeholder="Enter text to encrypt">
+    <button onclick="encryptText()">Encrypt</button>
+    <textarea id="outputTextEncrypt" placeholder="Encrypted text" readonly></textarea>
+
+    <h2>Text Decryptor</h2>
+    <input type="text" id="inputTextDecrypt" placeholder="Enter text to decrypt">
+    <button onclick="decryptText()">Decrypt</button>
+    <textarea id="outputTextDecrypt" placeholder="Decrypted text" readonly></textarea>
+</body>
